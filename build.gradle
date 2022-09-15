@@ -28,8 +28,8 @@ def gitRevision = { ->
 
 project.ext.gitRevision = gitRevision()
 
-group = 'cd.go.contrib.task.skeleton'
-version = '0.2-SNAPSHOT'
+group = 'paynefulapps.gocd.github.repo.task'
+version = '0.0.1-SNAPSHOT'
 
 // these values that go into plugin.xml
 // TODO: change these
@@ -37,10 +37,10 @@ project.ext.pluginDesc = [
   id         : 'cd.go.contrib.task.skeleton',
   version    : project.version,
   goCdVersion: '16.12.0',
-  name       : 'Example Task Plugin',
+  name       : 'GitHub Repo Task Plugin',
   description: 'Some longer description of your plugin goes here',
-  vendorName : 'Acme Corp',
-  vendorUrl  : 'https://github.com/user/repository'
+  vendorName : 'Payneful Apps',
+  vendorUrl  : 'https://github.com/YoungPhoenix09/github-repo-task-plugin'
 ]
 
 // Force 1.7 compatibility to ensure that it works with older JVMs

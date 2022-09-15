@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 ThoughtWorks, Inc.
+ * Copyright 2022 ThoughtWorks, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,26 @@
  * limitations under the License.
  */
 
-package cd.go.contrib.task.skeleton;
+package paynefulapps.gocd.github.repo.task;
 
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.go.plugin.api.request.GoPluginApiRequest;
 import com.thoughtworks.go.plugin.api.response.DefaultGoPluginApiResponse;
 import com.thoughtworks.go.plugin.api.response.GoPluginApiResponse;
-import com.thoughtworks.go.plugin.api.task.JobConsoleLogger;
 
+import java.util.HashMap;
 import java.util.Map;
 
-// TODO: add code here to execute your task
-public class ExecuteRequest {
+public class ValidateRequest {
     public GoPluginApiResponse execute(GoPluginApiRequest request) {
-        CurlTaskExecutor executor = new CurlTaskExecutor();
-        Map executionRequest = (Map) new GsonBuilder().create().fromJson(request.requestBody(), Object.class);
-        Map config = (Map) executionRequest.get("config");
-        Map context = (Map) executionRequest.get("context");
-
-        Result result = executor.execute(new TaskConfig(config), new Context(context), JobConsoleLogger.getConsoleLogger());
-        return new DefaultGoPluginApiResponse(result.responseCode(), TaskPlugin.GSON.toJson(result.toMap()));
+        HashMap<String, Object> validationResult = new HashMap<>();
+        int responseCode = DefaultGoPluginApiResponse.SUCCESS_RESPONSE_CODE;
+        Map configMap = (Map) new GsonBuilder().create().fromJson(request.requestBody(), Object.class);
+        HashMap errorMap = new HashMap();
+        if (!configMap.containsKey(TaskPlugin.URL_PROPERTY) || ((Map) configMap.get(TaskPlugin.URL_PROPERTY)).get("value") == null || ((String) ((Map) configMap.get(TaskPlugin.URL_PROPERTY)).get("value")).trim().isEmpty()) {
+            errorMap.put(TaskPlugin.URL_PROPERTY, "URL cannot be empty");
+        }
+        validationResult.put("errors", errorMap);
+        return new DefaultGoPluginApiResponse(responseCode, TaskPlugin.GSON.toJson(validationResult));
     }
 }

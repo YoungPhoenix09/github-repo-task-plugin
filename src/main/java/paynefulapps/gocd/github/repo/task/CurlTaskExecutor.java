@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 ThoughtWorks, Inc.
+ * Copyright 2022 ThoughtWorks, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cd.go.contrib.task.skeleton;
+package paynefulapps.gocd.github.repo.task;
 
 import com.thoughtworks.go.plugin.api.task.*;
 
@@ -27,7 +27,7 @@ public class CurlTaskExecutor {
 
     public static final String CURLED_FILE = "index.txt";
 
-    public Result execute(TaskConfig taskConfig, Context context, JobConsoleLogger console) {
+    public Result execute(paynefulapps.gocd.github.repo.task.TaskConfig taskConfig, Context context, JobConsoleLogger console) {
         try {
             return runCommand(context, taskConfig, console);
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class CurlTaskExecutor {
         }
     }
 
-    private Result runCommand(Context taskContext, TaskConfig taskTaskConfig, JobConsoleLogger console) throws IOException, InterruptedException {
+    private Result runCommand(Context taskContext, paynefulapps.gocd.github.repo.task.TaskConfig taskTaskConfig, JobConsoleLogger console) throws IOException, InterruptedException {
         ProcessBuilder curl = createCurlCommandWithOptions(taskContext, taskTaskConfig);
         console.printLine("Launching command: " + curl.command());
         curl.environment().putAll(taskContext.getEnvironmentVariables());
