@@ -24,5 +24,8 @@
       <name>${vendorName}</name>
       <url>${vendorUrl}</url>
     </vendor>
+    <target-os>
+      <value>Linux</value>
+    </target-os>
   </about>
 </go-plugin>

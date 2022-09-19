@@ -1,19 +1,3 @@
-/*
- * Copyright 2022 ThoughtWorks, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package paynefulapps.gocd.github.repo.task;
 
 import com.google.gson.Gson;
@@ -32,12 +16,12 @@ import java.util.Arrays;
 @Extension
 public class TaskPlugin implements GoPlugin {
 
-    public static final String URL_PROPERTY = "Url";
-    public static final String ADDITIONAL_OPTIONS = "AdditionalOptions";
-    public static final String SECURE_CONNECTION = "yes";
-    public static final String SECURE_CONNECTION_PROPERTY = "SecureConnection";
-    public static final String REQUEST_TYPE = "-G";
-    public static final String REQUEST_PROPERTY = "RequestType";
+    public static final String REPO_URL_PROPERTY = "repoUrl";
+
+    public static final String BRANCH_NAME_PROPERTY = "branchName";
+
+    public static final String AUTH_TOKEN_PROPERTY = "authToken";
+
     public static final Gson GSON = new GsonBuilder().serializeNulls().create();
 
     public static Logger LOGGER = Logger.getLoggerFor(TaskPlugin.class);
