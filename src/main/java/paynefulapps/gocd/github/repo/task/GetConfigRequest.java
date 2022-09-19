@@ -17,12 +17,18 @@ public class GetConfigRequest {
         url.put("required", true);
         config.put(TaskPlugin.REPO_URL_PROPERTY, url);
 
+        HashMap<String, Object> branch = new HashMap<>();
+        branch.put("default-value", "master");
+        branch.put("display-order", "1");
+        branch.put("display-name", "Repo Branch Name");
+        branch.put("required", true);
+        config.put(TaskPlugin.BRANCH_NAME_PROPERTY, branch);
+
         HashMap<String, Object> token = new HashMap<>();
-        token.put("default-value", "master");
-        token.put("display-order", "1");
-        token.put("display-name", "Repo Branch Name");
+        token.put("display-order", "2");
+        token.put("display-name", "GitHub Authentication Token");
         token.put("required", true);
-        config.put(TaskPlugin.BRANCH_NAME_PROPERTY, token);
+        config.put(TaskPlugin.AUTH_TOKEN_PROPERTY, token);
 
         return DefaultGoPluginApiResponse.success(TaskPlugin.GSON.toJson(config));
     }
