@@ -30,7 +30,7 @@ public class RepoFetcherTest {
         String expectedRepoName = "./simple-image-server-main";
         String repoUrl = "https://github.com/YoungPhoenix09/simple-image-server";
         String branchName = "main";
-        
+
         repoFetcher.fetchRepo(
                 repoUrl,
                 branchName,
