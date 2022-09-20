@@ -10,14 +10,17 @@ import java.net.http.HttpResponse;
 
 public class RepoFetcher {
     private final HttpClient client;
+    private Context pluginContext;
 
-    public RepoFetcher() {
+    public RepoFetcher(Context context) {
+        pluginContext = context;
+
         client = HttpClient.newBuilder()
                 .followRedirects(HttpClient.Redirect.ALWAYS)
                 .build();
     }
 
-    public Result fetchRepo(String repoUrl, String branchName, String authToken, Context context) {
+    public Result fetchRepo(String repoUrl, String branchName, String authToken) {
         try {
             File zippedRepo = downloadRepo(repoUrl, branchName, authToken);
             unzipRepo(zippedRepo);
@@ -42,7 +45,8 @@ public class RepoFetcher {
         HttpResponse<byte[]> response =  client.send(repoRequest, HttpResponse.BodyHandlers.ofByteArray());
         System.out.println("Status code: " + response.statusCode());
 
-        File zippedRepo = new File("./repo.zip");
+        String filePath = pluginContext.getWorkingDir() + "/repo.zip";
+        File zippedRepo = new File(filePath);
         FileOutputStream fileWriter = new FileOutputStream(zippedRepo);
         fileWriter.write(response.body());
         fileWriter.close();
@@ -52,7 +56,7 @@ public class RepoFetcher {
 
     public void unzipRepo(File zippedRepo) throws IOException {
         ProcessBuilder unzipCommandBuilder = new ProcessBuilder("unzip", zippedRepo.getAbsolutePath());
-        unzipCommandBuilder.directory(new File("./"));
+        unzipCommandBuilder.directory(new File(pluginContext.getWorkingDir()));
         unzipCommandBuilder.start();
     }
 }
