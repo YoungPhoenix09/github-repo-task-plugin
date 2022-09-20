@@ -10,7 +10,7 @@ public class TaskConfig {
     public TaskConfig(Map config) {
         repoUrl = getValue(config, TaskPlugin.REPO_URL_PROPERTY);
         branchName = getValue(config, TaskPlugin.BRANCH_NAME_PROPERTY);
-        authToken = getValue(config, TaskPlugin.AUTH_TOKEN_PROPERTY);
+        authToken = getValue(config, TaskPlugin.AUTH_TOKEN_VAR_PROPERTY);
     }
 
     private String getValue(Map config, String property) {
@@ -25,7 +25,7 @@ public class TaskConfig {
         return branchName;
     }
 
-    public String getAuthToken() {
+    public String getAuthTokenVar() {
         return authToken;
     }
 }
