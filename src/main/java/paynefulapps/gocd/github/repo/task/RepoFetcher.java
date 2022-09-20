@@ -17,7 +17,7 @@ public class RepoFetcher {
                 .build();
     }
 
-    public Result fetchRepo(String repoUrl, String branchName, String authToken) {
+    public Result fetchRepo(String repoUrl, String branchName, String authToken, Context context) {
         try {
             File zippedRepo = downloadRepo(repoUrl, branchName, authToken);
             unzipRepo(zippedRepo);
