@@ -14,9 +14,7 @@ import java.util.Properties;
 import static org.junit.Assert.assertTrue;
 
 public class RepoFetcherTest {
-    private final RepoFetcher repoFetcher = new RepoFetcher();
-    private final String repoUrl = "https://github.com/YoungPhoenix09/simple-image-server";
-    private final String branchName = "main";
+    private final RepoFetcher repoFetcher = new RepoFetcher(createContext());
     private String authToken = "";
 
     @Before
@@ -30,15 +28,13 @@ public class RepoFetcherTest {
     @Test
     public void repoIsFetchedAsZip() {
         String expectedRepoName = "./simple-image-server-main";
-        Map<String,Object> contextMap = new HashMap<>();
-        contextMap.put("workingDirectory", "./");
-        Context context = new Context(contextMap);
-
+        String repoUrl = "https://github.com/YoungPhoenix09/simple-image-server";
+        String branchName = "main";
+        
         repoFetcher.fetchRepo(
-            repoUrl,
-            branchName,
-            authToken,
-            context
+                repoUrl,
+                branchName,
+            authToken
         );
 
         File repoDir = new File(expectedRepoName);
@@ -56,5 +52,12 @@ public class RepoFetcherTest {
             deleteProcess.command("rm", "-rf", repoPath);
             deleteProcess.start();
         }
+    }
+
+    private Context createContext() {
+        Map<String,Object> contextMap = new HashMap<>();
+        contextMap.put("workingDirectory", "./");
+
+        return new Context(contextMap);
     }
 }
