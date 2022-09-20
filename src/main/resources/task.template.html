@@ -8,13 +8,11 @@
 <div class="form_item_block">
   <label>Repo Branch Name:<span class="asterisk">*</span></label>
   <input type="text" ng-model="branchName" ng-required="true"/>
-  <!--<span class="form_error" ng-show="GOINPUTNAME[branchName].$error.branchName">Incorrect branch name format.</span>-->
   <span class="form_error" ng-show="GOINPUTNAME[branchName].$error.server">{{ GOINPUTNAME[branchName].$error.server }}</span>
 </div>
 
 <div class="form_item_block">
   <label>GitHub Auth Token Env Variable:<span class="asterisk">*</span></label>
-  <input type="password" ng-model="authTokenVar" ng-required="true"/>
-  <!--<span class="form_error" ng-show="GOINPUTNAME[authToken].$error.authToken">Incorrect auth token format.</span>-->
-  <span class="form_error" ng-show="GOINPUTNAME[authToken].$error.server">{{ GOINPUTNAME[authToken].$error.server }}</span>
+  <input type="text" ng-model="authTokenVar" ng-required="true"/>
+  <span class="form_error" ng-show="GOINPUTNAME[authTokenVar].$error.server">{{ GOINPUTNAME[authTokenVar].$error.server }}</span>
 </div>
