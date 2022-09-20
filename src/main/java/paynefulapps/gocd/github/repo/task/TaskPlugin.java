@@ -20,7 +20,7 @@ public class TaskPlugin implements GoPlugin {
 
     public static final String BRANCH_NAME_PROPERTY = "branchName";
 
-    public static final String AUTH_TOKEN_PROPERTY = "authToken";
+    public static final String AUTH_TOKEN_VAR_PROPERTY = "authTokenVar";
 
     public static final Gson GSON = new GsonBuilder().serializeNulls().create();
 

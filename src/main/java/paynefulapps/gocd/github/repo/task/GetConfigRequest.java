@@ -26,9 +26,9 @@ public class GetConfigRequest {
 
         HashMap<String, Object> token = new HashMap<>();
         token.put("display-order", "2");
-        token.put("display-name", "GitHub Authentication Token");
+        token.put("display-name", "GitHub Auth Token Env Variable");
         token.put("required", true);
-        config.put(TaskPlugin.AUTH_TOKEN_PROPERTY, token);
+        config.put(TaskPlugin.AUTH_TOKEN_VAR_PROPERTY, token);
 
         return DefaultGoPluginApiResponse.success(TaskPlugin.GSON.toJson(config));
     }
