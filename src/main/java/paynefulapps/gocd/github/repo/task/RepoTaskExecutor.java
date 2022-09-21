@@ -14,7 +14,7 @@ public class RepoTaskExecutor {
                 return new Result(false, "Environment variable $" + taskConfig.getAuthTokenVar() + " does not have a value.");
             }
 
-            return repoFetcher.fetchRepo(taskConfig.getRepoUrl(), taskConfig.getBranchName(), taskConfig.getAuthTokenVar());
+            return repoFetcher.fetchRepo(taskConfig.getRepoUrl(), taskConfig.getBranchName(), authToken);
         } catch (Exception e) {
             return new Result(false, "Failed to pull down repo from URL: " + taskConfig.getRepoUrl(), e);
         }

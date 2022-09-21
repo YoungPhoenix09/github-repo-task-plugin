@@ -10,7 +10,7 @@ import java.net.http.HttpResponse;
 
 public class RepoFetcher {
     private final HttpClient client;
-    private Context pluginContext;
+    private final Context pluginContext;
 
     public RepoFetcher(Context context) {
         pluginContext = context;
@@ -23,12 +23,16 @@ public class RepoFetcher {
     public Result fetchRepo(String repoUrl, String branchName, String authToken) {
         try {
             File zippedRepo = downloadRepo(repoUrl, branchName, authToken);
+
+            if (!this.checkFileSizeNotZero(zippedRepo)) {
+                throw new Exception("Failed to download " + zippedRepo.getName() + ". Repo dos not exist or file size is zero.");
+            }
             unzipRepo(zippedRepo);
             zippedRepo.delete();
 
             return new Result(true, "Successfully downloaded " + branchName + " branch of " + repoUrl + ".");
         } catch (Exception e) {
-            return new Result(false, "Failed downloading repo. Please verify your URL, branch, and auth token are correct.");
+            return new Result(false, "Failed downloading repo. Please verify your URL, branch, and auth token are correct.", e);
         }
     }
 
@@ -58,5 +62,9 @@ public class RepoFetcher {
         ProcessBuilder unzipCommandBuilder = new ProcessBuilder("unzip", zippedRepo.getAbsolutePath());
         unzipCommandBuilder.directory(new File(pluginContext.getWorkingDir()));
         unzipCommandBuilder.start();
+    }
+
+    public boolean checkFileSizeNotZero(File file) {
+        return file.exists() && file.getTotalSpace() > 0;
     }
 }
